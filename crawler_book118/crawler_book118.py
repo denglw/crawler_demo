@@ -11,6 +11,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import os
+import time
 from urllib import urlretrieve
 from merge_img_pdf import MergeImgPdf
 
@@ -48,6 +49,7 @@ class CrawlerBook:
                 img_filename = 'images/' + "{0:03d}".format(i + 1) + '.jpg'
                 urlretrieve(url=url, filename=img_filename)
                 nextpage.click()  # 执行翻页
+                time.sleep(3) #休眠便于页面加载完成
             except TimeoutException:
                 print("加载出错")
                 break
@@ -93,9 +95,9 @@ if __name__=="__main__":
     crawlerBook.mkdir(path)
     browseUrl = 'https://max.book118.com/html/2017/0904/131853902.shtm'
     crawlerUrl = 'https://view55.book118.com/?readpage=RLnvymE5HZjh9LUTM3lKqw==&furl=o4j9ZG7fK94kkYRv4gktA2rYw4NlKHsQOI0uhdd7J6rybHMmR67ar6iKMqokN@IiO2OHdTQx8qL8FQkiLmQ7IRPuoLdY3mrpisxEl1qgF_r8BhhNbOGopg==&n=1'
-    pageNum = 5 #book总共多少页 136
+    pageNum = 136 #book总共多少页 136
     crawlerBook.downLoad(browseUrl,crawlerUrl,pageNum)
     mergeImgPdf = MergeImgPdf()
     fileName=crawlerBook.docTitle
-    mergeImgPdf.merge_img_pdf(path,fileName+'.pdf')
+    mergeImgPdf.merge_img_pdf(path,fileName+".pdf")
 

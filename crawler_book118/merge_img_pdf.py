@@ -9,11 +9,14 @@ from PIL import Image
 import os
 import sys
 print sys.getdefaultencoding()
+from PIL import ImageFile
+
+# python 多图片合并pdf
 # https://www.2cto.com/kf/201803/733604.html
 # https://blog.csdn.net/staHuri/article/details/81876310
 
 class MergeImgPdf:
-    from PIL import ImageFile
+
     ImageFile.LOAD_TRUNCATED_IMAGES = True #封装于class添加此语句解决异常
     def merge_img_pdf(self,path,pdf_name):
         #file_list = os.listdir('.')
